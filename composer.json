@@ -1,0 +1,20 @@
+{
+    "name": "squall/facebook",
+    "description": "",
+    "authors": [
+        {
+            "name": "Kyaw Min Lwin Squall",
+            "email": "kyaw.min.lwin.squall@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Squall\\Facebook": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
