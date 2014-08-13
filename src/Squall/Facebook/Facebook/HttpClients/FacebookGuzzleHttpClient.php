@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\HttpClients;
+namespace Squall\Facebook\Facebook\HttpClients;
 
 use Facebook\FacebookSDKException;
 

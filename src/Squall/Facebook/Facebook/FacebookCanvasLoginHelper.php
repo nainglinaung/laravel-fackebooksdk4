@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook;
+namespace Squall\Facebook\Facebook;
 
 /**
  * Class FacebookCanvasLoginHelper

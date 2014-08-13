@@ -21,7 +21,7 @@ class FacebookServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->package('squall/facebook');
-        AliasLoader::getInstance()->alias('FB', 'Squall\Facebook\FB');
+        AliasLoader::getInstance()->alias('Facebook', 'Squall\Facebook\Facebook');
     }
 
     /**
@@ -31,7 +31,7 @@ class FacebookServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->app['facebook'] = $this->app->share(function ($app) {
-            return new FB();
+            return new \Facebook();
         });
     }
 
