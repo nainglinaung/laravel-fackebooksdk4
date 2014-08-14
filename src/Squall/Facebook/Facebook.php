@@ -43,7 +43,7 @@ class Facebook {
 
         $request = new FacebookRequest($this->get_canvasSession(), 'GET', '/me');
         $response = $request->execute();
-        return $response->getGraphObject()->asArray();
+        return $response->getGraphObject(GraphUser::className())->asArray();
     }
 
     public function get_loginUrl() {
