@@ -73,7 +73,7 @@ Get Tab App Session & Canvas App Session.
 
 ### get_graphData($session, $query, $is_Canvas)
 
-Get Graph Data with various query. $is_Canvas value is boolean *.cwTRUE or *.cwFALSE
+Get Graph Data with various query. $is_Canvas value is boolean <b>TRUE</b> or <b>FALSE</b>
 
 ### get_loginSession($redirect_uri)
 
