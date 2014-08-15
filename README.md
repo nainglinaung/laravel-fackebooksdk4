@@ -34,18 +34,21 @@ So all the methods listed here http://developers.facebook.com/docs/reference/php
 # Usage Our Functions
 ```
     $fb = new Facebook();
+
     //get Page Id From Tab Application
     $fb->get_tabId();
+
     //Check User was liked Our Tab App
     $fb->isLiked();
-    //get access token
 
+    //get access token
     $fb->get_accessToken();
+
     //get page session
     $session = $fb->get_canvasSession();
 
     if (isset($session)) {
-        $response = $fb->get_grapData('/me/taggable_friends', true);
+        $response = $fb->get_graphData($session,'/me/taggable_friends', true);
         $fb->post_links('http://www.example.com', 'post link to feed');
     } else {
         echo '<a href="' . $fb->get_loginUrl() . '" target="_top">Login</a>';
@@ -68,9 +71,13 @@ Check For Tab Application Like.
 
 Get Tab App Session & Canvas App Session.
 
-### get_grapData($query, $is_Canvas)
+### get_graphData($session, $query, $is_Canvas)
 
-Get Graph Data with various query.
+Get Graph Data with various query. $is_Canvas value is boolean *.cwTRUE or *.cwFALSE
+
+### get_loginSession($redirect_uri)
+
+Get Session with Redirect Login outside Canvas
 
 ### post_links($link, $message)
 

@@ -38,7 +38,7 @@ class Facebook {
         return $pageHelper->getSession();
     }
 
-    public function get_grapData($session,$query,$is_canvas) {
+    public function get_graphData($session,$query,$is_canvas) {
         
         if($is_canvas){
             $request = new FacebookRequest($this->get_canvasSession(), 'GET', $query);
