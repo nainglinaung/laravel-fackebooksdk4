@@ -38,18 +38,24 @@ class Facebook {
         return $pageHelper->getSession();
     }
 
-    public function get_grapData($session,$query,$is_Canvas) {
-        if($is_Canvas){
+    public function get_grapData($session,$query,$is_canvas) {
+        
+        if($is_canvas){
             $request = new FacebookRequest($this->get_canvasSession(), 'GET', $query);
             $response = $request->execute();
             return $response->getGraphObject(GraphUser::className())->asArray();
         }else{
-            echo '<pre>';print_r($session);exit;
-            // $request = new FacebookRequest($session, 'GET', $query);
-            // $response = $request->execute();
-            // print_r($response);exit;
-            // return $response->getGraphObject(GraphUser::className())->asArray();
+            try{
+                $request = new FacebookRequest($session, 'GET', $query);
+                $response = $request->execute();
+                return $response->getGraphObject(GraphUser::className())->asArray();
+            } catch (FacebookRequestException $ex) {
+              $ex->getMessage();
+            } catch (\Exception $ex) {
+                echo $ex->getMessage();
+            }
         }
+
     }
     
     public function get_loginUrl($scope,$redirect_uri) {
