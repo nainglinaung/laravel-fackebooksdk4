@@ -38,8 +38,8 @@ class Facebook {
         return $pageHelper->getSession();
     }
 
-    public function get_grapData($session,$query,$is_canvas) {
-        if($is_canvas){
+    public function get_grapData($session,$query,$is_Canvas) {
+        if($is_Canvas){
             $request = new FacebookRequest($this->get_canvasSession(), 'GET', $query);
             $response = $request->execute();
             return $response->getGraphObject(GraphUser::className())->asArray();
@@ -67,5 +67,22 @@ class Facebook {
         }
 
     }
+
+    public function post_links($link, $message) {
+        try {
+
+            $response = (new FacebookRequest(
+                    $this->get_canvasSession(), 'POST', '/me/feed', array(
+                'link' => $link,
+                'message' => $message
+                    )))->execute()->getGraphObject();
+
+            return $response->getProperty('id');
+        } catch (FacebookRequestException $e) {
+
+            echo "Exception occured, code: " . $e->getCode();
+            echo " with message: " . $e->getMessage();
+        }
+    }    
 
 }
