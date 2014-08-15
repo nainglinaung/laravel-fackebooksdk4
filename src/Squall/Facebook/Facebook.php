@@ -12,7 +12,6 @@ class Facebook {
 
     public function __construct() {
         FacebookSession::setDefaultApplication(Config::get('facebook::appId'), Config::get('facebook::appSecret'));
-        $this->redirectLogin = new FacebookRedirectLoginHelper(Config::get('facebook::redirectLogin'));
     }
 
     public function get_accessToken() {
@@ -39,15 +38,34 @@ class Facebook {
         return $pageHelper->getSession();
     }
 
-    public function get_grapData($session) {
-
-        $request = new FacebookRequest($this->get_canvasSession(), 'GET', '/me');
-        $response = $request->execute();
-        return $response->getGraphObject(GraphUser::className())->asArray();
+    public function get_grapData($session,$query,$is_canvas) {
+        if($is_canvas){
+            $request = new FacebookRequest($this->get_canvasSession(), 'GET', $query);
+            $response = $request->execute();
+            return $response->getGraphObject(GraphUser::className())->asArray();
+        }else{
+            echo '<pre>';print_r($session);exit;
+            // $request = new FacebookRequest($session, 'GET', $query);
+            // $response = $request->execute();
+            // print_r($response);exit;
+            // return $response->getGraphObject(GraphUser::className())->asArray();
+        }
+    }
+    
+    public function get_loginUrl($scope,$redirect_uri) {
+        $this->redirectLogin = new FacebookRedirectLoginHelper($redirect_uri);
+        return $this->redirectLogin->getLoginUrl($scope);
     }
 
-    public function get_loginUrl() {
-        return $this->redirectLogin->getLoginUrl(Config::get('facebook::scope'));
+    public function get_loginSession($redirect_uri){
+        $loginHelper = new FacebookRedirectLoginHelper($redirect_uri);
+        $session = $loginHelper->getSessionFromRedirect();
+        
+        if($session){
+            $token = $session->getToken();
+            return $token;
+        }
+
     }
 
 }
