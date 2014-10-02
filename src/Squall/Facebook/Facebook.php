@@ -97,14 +97,14 @@ class Facebook {
 
     public function get_graphData($session,$query,$is_canvas) {
         
-        if($is_canvas){
+        if ($is_canvas) {
 
             $request = new FacebookRequest($this->get_canvasSession(), 'GET', $query);
             $response = $request->execute();
 
             return $response->getGraphObject(GraphUser::className())->asArray();
 
-        }else{
+        } else {
 
             try{
 
